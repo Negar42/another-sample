@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <help_text>/italic text/
+</help_text>
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>900</x>
+      <y>99</y>
+      <w>360</w>
+      <h>981</h>
+    </coordinates>
+    <panel_attributes>*Manager*
+--
+-allDrives = new ArrayList&lt;Drive&gt;(): ArrayList&lt;Drive&gt;
+-scanner = OSCommandProcessor.scanner: Scanner
+-OS_NAME: String
+-OS_VERSION: String
+-DRIVES_NUM: int
+-HARD_SIZE: int
+-freeSpace: int
+-folderLocation: Folder
+-driveLocation: Drive
+-coppiedFolders = new ArrayList&lt;Folder&gt;(): ArrayList&lt;Folder&gt;
+-cuttedFolders = new ArrayList&lt;Folder&gt;(): ArrayList&lt;Folder&gt;
+-coppiedFiles = new ArrayList&lt;File&gt;(): ArrayList&lt;File&gt;
+-cuttedFiles = new ArrayList&lt;File&gt;(): ArrayList&lt;File&gt;
+--
++installOs(String name, String version): void
++getHardInformation(int size, int number): void
++installDrives(String[] drive): void
++printOsInformation(): void
++printStatus(): StringBuilder
+-appendFiles(): StringBuilder
++printDrivesStatus(): StringBuilder
++printFileStats(String fileName): void
++printFrequents(): void
++goToSystemDrive(): void
++goToDriveLocation(String driveName): void
++goToFolderLocation(String folderName): void
++getDriveByName(String name): Drive
++hasDriveWithName(String name): boolean
++goBack(): void
++createFolder(String folderName): void
++createFile(String fileName, String format, int size): void
+-createFileInFolder(String fileName, String format, int size): void
+-createFileInDrive(String fileName, String format, int size): void
+-createVideo(String fileName, int size): void
+-createImage(String fileName, int size): void
+-createText(String fileName, int size): void
++deleteFile(String fileName): String
++deleteFolder(String folderName): String
++renameFile(String oldName, String newName): String
++renameFolder(String oldName, String newName): String
++changeText(String fileName, String text): void
++getFolderLocation(): Folder
++getDriveLocation(): Drive
++getAbsoluteLocation(Folder origin, Drive drive): String
++getAllDrives(): ArrayList&lt;Drive&gt;
++copyFiles(String[] fileNames): void
++copyFolders(String[] folderNames): void
++cutFiles(String[] fileNames): void
++cutFolders(String[] folderNames): void
++paste(): void
+-pasteCoppiedFiles(): void
+-pasteCoppiedFolders(): void
+-copyConstructFile(File file, Folder folder, Drive drive): void
+-completePaste(Folder folder, Folder newFolder): void
+-pasteCuttedFiles(): void
+-pasteCuttedFolders(): void
+-deleteCuttedFolder(Folder folder): void
+-deleteCuttedFile(File file): void
+-finalPasteTouch(Folder folder): void
+-clearFunctions(): void
+-updateDrives(): void
+-updateFolder(Folder folder): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1161</x>
+      <y>1179</y>
+      <w>378</w>
+      <h>603</h>
+    </coordinates>
+    <panel_attributes>Folder
+--
+-name: String
+-size: int
+-allFolders = new ArrayList&lt;Folder&gt;(): ArrayList&lt;Folder&gt;
+-includingFolders: ArrayList&lt;Folder&gt;
+-includingFiles: ArrayList&lt;File&gt;
+-containingFolder: Folder
+-containingDrive: Drive
+-openedTimes: int
+-absoluteAddress: String
+--
++Folder(String name): ctor
++Folder(Folder folder, Folder headFolder, Drive headDrive): ctor
++includesFolder(String folderName): boolean
++includesFile(String fileName): boolean
++getFolderByName(String folderName): Folder
++getFileByName(String fileName): File
++getName(): String
++setName(String name): void
++getSize(): int
++setSize(int size): void
++getIncludingFolders(): ArrayList&lt;Folder&gt;
++getIncludingFiles(): ArrayList&lt;File&gt;
++getContainingFolder(): Folder
++getContainingDrive(): Drive
++getOpenedTimes(): int
++updateOpenedTimes(): void
++addToIncludingFolders(Folder folder): void
++addToIncludingFiles(File file): void
++toString(): String
++setIncludingFolders(ArrayList&lt;Folder&gt; includingFolders): void
++setIncludingFiles(ArrayList&lt;File&gt; includingFiles): void
++getAllFolders(): ArrayList&lt;Folder&gt;
++setContainingFolder(Folder containingFolder): void
++setContainingDrive(Drive containingDrive): void
++setOpenedTimes(int openedTimes): void
++getAbsoluteAddress(): String
++setAbsoluteAddress(String absoluteAddress): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1323</x>
+      <y>99</y>
+      <w>297</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>*OSCommandProcessor*
+--
++scanner = new Scanner(System.in): Scanner
+-command: String
+-manager: Manager
+-pattern: Pattern
+-matcher: Matcher
+--
++OSCommandProcessor(Manager manager): ctor
++installCommand(): void
++run(): void
+-openFolder(String folderName): void
+-goToDrive(String driveName): void
+-processBack(): void
+-processCreateFolder(String folderName): void
+-processCreateFile(String[] fileInformation): void
+-processDeleteFile(String fileName): void
+-processDeleteFolder(String folderName): void
+-processFileRename(String[] fileNames): void
+-processFolderRename(String[] folderNames): void
+-processStatus(): void
+-processDrivesStatus(): void
+-processCopyFile(String files): void
+-processCopyFolder(String folders): void
+-processCutFile(String files): void
+-processCutFolder(String folders): void
+-processPaste(): void
+-processWriting(String file): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1341</x>
+      <y>639</y>
+      <w>270</w>
+      <h>342</h>
+    </coordinates>
+    <panel_attributes>Drive
+--
+-includingFolders: ArrayList&lt;Folder&gt;
+-includingFiles: ArrayList&lt;File&gt;
+-name: String
+-size: int
+-freeSpace: int
+--
++Drive(String name, int size): ctor
++includesFolder(String folderName): boolean
++includesFile(String fileName): boolean
++getIncludingFolders(): ArrayList&lt;Folder&gt;
++getIncludingFiles(): ArrayList&lt;File&gt;
++getFolderByName(String folderName): Folder
++getFileByName(String fileName): File
++getName(): String
++getSize(): int
++getFreeSpace(): int
++setFreeSpace(int freeSpace): void
++addToIncludingFolders(Folder folder): void
++addToIncludingFiles(File file): void
++toString(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>513</x>
+      <y>1080</y>
+      <w>306</w>
+      <h>261</h>
+    </coordinates>
+    <panel_attributes>File
+--
+#name: String
+#type: String
+#size: int
+#containingFolder: Folder
+#containingDrive: Drive
+--
++getName(): String
++setName(String name): void
++getType(): String
++getSize(): int
++getContainingFolder(): Folder
++getContainingDrive(): Drive
++toString(): String
++setContainingFolder(Folder containingFolder): void
++setContainingDrive(Drive containingDrive): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>738</x>
+      <y>1422</y>
+      <w>405</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>Image
+--
+-resolution: String
+-extension: String
+--
++Image(String name, int size, String resolution, String extension): ctor
++Image(Image image, Folder folder, Drive drive): ctor
++getResolution(): String
++getExtension(): String
++setResolution(String resolution): void
++setExtension(String extension): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>333</x>
+      <y>1422</y>
+      <w>360</w>
+      <h>171</h>
+    </coordinates>
+    <panel_attributes>Video
+--
+-quality: String
+-length: String
+--
++Video(String name, int size, String quality, String length): ctor
++Video(Video video, Folder folder, Drive drive): ctor
++setQuality(String quality): void
++setLength(String length): void
++getQuality(): String
++getLength(): String
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>1449</y>
+      <w>279</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Text
+--
+-text: String
+--
++Text(String name, int size, String text): ctor
++Text(Text text, Folder folder, Drive drive): ctor
++getText(): String
++setText(String text): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1197</x>
+      <y>9</y>
+      <w>162</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>*Main*
+--
+--
++main(String[] args): void
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>612</x>
+      <y>1332</y>
+      <w>27</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>612</x>
+      <y>1332</y>
+      <w>315</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0;330.0;70.0;330.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>189</x>
+      <y>1332</y>
+      <w>450</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+</panel_attributes>
+    <additional_attributes>480.0;10.0;480.0;80.0;10.0;80.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1332</x>
+      <y>297</y>
+      <w>90</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+</diagram>
